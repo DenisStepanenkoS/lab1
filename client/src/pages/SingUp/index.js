@@ -16,7 +16,19 @@ const SingUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Submitted Data:", formData);
-    // Здесь можно добавить API-запрос для регистрации пользователя
+      // API endpoint
+      const apiUrl = 'http://localhost:5000/api/users';
+      // Отправка POST-запроса с данными в теле
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then(response => response.json()) // Преобразуем ответ от сервера в JSON
+        .then(data => console.log('Response:', data)) // Выводим данные ответа
+        .catch(error => console.error('Error:', error)); // Обрабатываем ошибки
   };
 
   return (
